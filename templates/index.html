@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>$$ Ninja Money $$</title>
+
+</head>
+
+<body id="backgroundbox">
+    <div id="gameinfo">
+        <p>Welcome to my "Ninja Gold" game! Click on the any of the secret Ninja locations to gain gold! If you're
+            feeling
+            lucky today, come lay a bet in the Ninja casino!
+            GOOD LUCK! </p>
+
+
+    </div>
+
+    <div id="main_container">
+
+        <h1 id="header">$Ninja Gold$</h1>
+        <p id="balancebox">My Bag Of Gold: <span class="gold">{{request.session.total_gold}}</span></p>
+
+        <div class="forms">
+            <!-- Because we only have one route that we are processing the forms with. The "input type=hidden" to determine what form
+    the 'user' clicked. We will be able to see the action in the page sourse, but not the html. -->
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <h3>The Old Rice Farm</h3>
+                <p>(Earn 10-20 Gold)</p>
+                <input type="hidden" name="building" value="farm"><button id="farm_gold_btn">Find Gold!</button>
+            </form>
+
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <h3>The Sensei's Cave</h3>
+                <p>(Earn 5-10 Gold)</p>
+                <input type="hidden" name="building" value="cave"><button id="cave_gold_btn">Find Gold!</button>
+            </form>
+
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <h3>House of Zen</h3>
+                <p>(Earn 2-5 Gold)</p>
+                <input type="hidden" name="building" value="house"><button id="house_gold_btn">Find Gold!</button>
+            </form>
+
+
+            <form action="/process_money" method="POST">
+                {% csrf_token %}
+                <h3>Dojo Casino</h3>
+                <p>(Earn/Lose 0-50 Gold)</p>
+                <input type="hidden" name="building" value="casino"><button id="casino_gold_btn">I'm Feeling
+                    Lucky</button>
+            </form>
+        </div>
+
+        <div id="image">
+
+
+            <img src=http://clipart-library.com/data_images/554886.png alt="Ninja Clip Art">
+
+            <img src=http://clipart-library.com/data_images/201257.jpg alt="Gold Bars Clipart">
+
+            <img src=http://clipart-library.com/data_images/554886.png alt="Ninja Clip Art">
+
+            <form action="/reset" method="POST">
+                {% csrf_token %}
+                <h3>RESET GAME</h3>
+                <p>Empty Bag</p>
+                <input type="hidden" name="building" value="farm"><button>Play Again</button>
+            </form>
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+
+</html>
